@@ -1,0 +1,41 @@
+<%= error_messages_for bonus, :header => "<h2>Ошибка</h2>" %>
+<%= form_for bonus, :action => resource(bonus.game, bonus.new_record? ? :bonuses : bonus) do %>
+  <p class="form_row">
+    <%= text_field :name, :label => "Название" %>
+  </p>
+  <p class="form_row">
+    <%= check_box :show_name, :label => "Показывать название командам?" %>
+  </p>
+  <br style="clear: both;" />
+  <p class="form_row">
+    <%= text_area :question, :label => "Текст задания" %>
+  </p>
+  <p class="form_row">
+    <%= text_field :price, :label => "Бонус/штраф в минутах" %>
+    <div class="form_hint">Укажите положительное число, если должен быть начислен бонус и отритцательное, если должен быть начислен штраф.</div>
+  </p>
+  <p  class="form_row">
+    <%= text_area :hint, :label => "Подсказка" %>
+    <div class="form_hint">Подсказка, которая будет выдана после выполнения бонуса.</div>
+  </p>
+  <p class="form_row">
+    <%= text_field :hint_title, :label => "Тип подсказки" %>
+    <div class="form_hint">
+       Этот заголовок будет отображаться для команд&nbsp;&nbsp;<strong>ДО</strong> выполнения бонуса.<br />
+       Например, если указать "полевой логике", то команды увидят текст:
+      <em>За выполнение бонуса вы получите подсказку по полевой логике</em>
+    </div>
+  </p>
+  <p class="form_row">
+    <%= select :levels, :collection => bonus.game.levels,
+                        :value_method => :id,
+                        :text_method => :name,
+                        :multiple => true,
+                        :selected => bonus.levels.map(&:id),
+                        :label => "Доступен на уровнях",
+                        :autocomplete => :off %>
+  </p>
+
+  <%= submit bonus.new_record? ? "Добавить" : "Сохранить" %>
+  <em><%= link_to "(отменить)", resource(bonus.game) %></em>
+<% end =%>

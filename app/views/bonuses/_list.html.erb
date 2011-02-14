@@ -1,0 +1,17 @@
+<% if bonuses.empty? %>
+    <em>Нет ни одного бонуса.</em>
+<% else %>
+    <% bonuses.each do |bonus| %>
+        <p>
+          <%=  link_to bonus.name, resource(bonus.game, bonus, :edit) %><br />
+          <div class="details">
+            Доступен на <%= "#{bonus.levels.size} #{bonus.levels.size == 1 ? 'уровне': 'уровнях'}" %><br />
+            За выполнение:<br />
+            <%= partial 'bonuses/award', :bonus => bonus %>
+          </div>
+           <%= link_to "(редактировать)", resource(bonus.game, bonus, :edit) unless bonus.game.started? %>
+           <%= link_to "(удалить)", resource(bonus.game, bonus, :delete) unless bonus.game.started? %>
+        </p>
+        <hr />
+    <% end %>
+<% end %>

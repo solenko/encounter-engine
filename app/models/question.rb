@@ -1,5 +1,6 @@
 class Question < ActiveRecord::Base
-	belongs_to :level
+	belongs_to :level, :polymorphic => true
+  belongs_to :bonus, :polymorphic => true
   has_many :answers, :dependent => :destroy
 
   def correct_answer=(answer)

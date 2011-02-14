@@ -2,9 +2,11 @@ class Level < ActiveRecord::Base
   acts_as_list :scope => :game
 
   belongs_to :game
-  has_many :questions, :dependent => :destroy
+  has_many :questions, :as => :parent, :dependent => :destroy
   has_many :answers
   has_many :hints, :order => "delay ASC"
+  has_many :level_bonuses
+  has_many :bonuses, :through => :level_bonuses
 
   validates_presence_of :name,
     :message => "Вы не ввели название задания"

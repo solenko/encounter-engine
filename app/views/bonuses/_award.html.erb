@@ -1,0 +1,11 @@
+<%- unless bonus.price == 0 %>
+    <strong>
+    <%= bonus.price > 0 ? 'Бонус' : 'Штраф'%>
+    </strong>
+    :&nbsp;<%= bonus.price_in_minutes %> мин.<br />
+<%- end %>
+<%- unless bonus.hint.blank? %>
+    <strong>Подсказка</strong>
+    <%= ": по #{bonus.hint_title}" unless bonus.hint_title.blank? %>
+    .
+<%- end %>

@@ -47,6 +47,7 @@ Merb::Router.prepare do
       levels.member :move_up, :method => :get
       levels.member :move_down, :method => :get
     end
+    games.resources :bonuses
   end
  
   match('/play/:game_id/tip', :method => :get).to(:controller => :game_passings, :action => :get_current_level_tip).name(:get_current_level_tip)

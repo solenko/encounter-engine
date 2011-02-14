@@ -57,6 +57,17 @@
       <%= link_to "Добавить новое задание", resource(@game, :levels, :new) if ! @game.started? %>
     </p>
   </fieldset>
+  <fieldset>
+    <legend>
+      Бонусы:
+    </legend>
+    <p>
+      <%= partial 'bonuses/list', :bonuses => @game.bonuses %>
+    </p>
+    <p>
+      <%= link_to "Добавить бонус", resource(@game, :bonuses, :new) unless @game.started? %>
+    </p>
+  </fieldset>
   <br/>
       <%= partial 'games/game_entries', :game_entries => @game_entries  %>
 

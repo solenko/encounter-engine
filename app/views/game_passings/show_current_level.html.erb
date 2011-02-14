@@ -72,6 +72,21 @@
 
 <br/>
 
+<%- unless @game_passing.current_level.bonuses.blank?  %>
+  <%- @game_passing.current_level.bonuses.each_with_index  do |bonus, index|  %>
+    <div class="bonus">
+      <h3>Бонус: <%= bonus.show_name? ? bonus.name : "№#{index}"%></h3>
+
+      <%- if @gmae_passing.bonus_passed?(bonus) %>
+        Бонус взят.<br />
+        <%= bonus.hint unless bonus.hint.blank? %> 
+      <%- else %>   
+        <%= partial "bonuses/award", :bonus => bonus %>
+      <%- end %>
+    </div>
+  <%- end %>
+<%- end %>
+
 <% if current_user.captain? %>
     <%= link_to "Сойти с дистанции", "/game_passings/exit_game/#{@game_passing.game_id}" %>
 <% end %>
